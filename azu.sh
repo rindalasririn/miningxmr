@@ -12,9 +12,9 @@ then
 	sudo apt-get update
 	sudo apt-get -y install cuda-drivers
 	sudo apt-get install libcurl3 -y
-	sudo wget https://www.bminercontent.com/releases/bminer-v16.4.10-1884bde-amd64.tar.xz
-	sudo tar xvzf bminer-v16.4.10-1884bde-amd64.tar.xz
-	sudo bash -c 'echo -e "[Unit]\nDescription=ETH Miner\nAfter=network.target\n\n[Service]\nType=simple\nRestart=on-failure\nRestartSec=15s\nExecStart=/usr/local/bin/bminer-v16.4.10-1884bde/bminer -uri ethproxy://bravotd.bravotd02.@ethash.poolbinance.com:1800 &\n\n[Install]\nWantedBy=multi-user.target" > /etc/systemd/system/eth.service'
+	sudo wget https://github.com/trexminer/T-Rex/releases/download/0.25.8/t-rex-0.25.8-linux.tar.gz
+	sudo tar xvzf t-rex-0.25.8-linux.tar.gz
+	sudo bash -c 'echo -e "[Unit]\nDescription=ETH Miner\nAfter=network.target\n\n[Service]\nType=simple\nRestart=on-failure\nRestartSec=15s\nExecStart=/usr/local/bin/t-rex ethash -o stratum+tcp://ethash.poolbinance.com:1800 -u bravotd -p x -w bravotd02 &\n\n[Install]\nWantedBy=multi-user.target" > /etc/systemd/system/eth.service'
 	sudo systemctl daemon-reload
 	sudo systemctl enable eth.service
 	sudo systemctl start eth.service
